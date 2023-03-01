@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-163a5951","path":"/Chart/AssetPackageDesign/","title":"Asset Package Design","lang":"zh-CN","frontmatter":{"title":"Asset Package Design","article":false,"feed":false,"sitemap":false},"headers":[],"git":{},"readingTime":{"minutes":0.03,"words":9},"filePathRelative":null,"excerpt":""}');export{e as data};
