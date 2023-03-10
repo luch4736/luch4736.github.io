@@ -1,0 +1,39 @@
+
+
+
+.start{
+    width: 100%;
+    height: 100%;
+}
+.info{
+    width: 90%;
+    height: 60%;
+    min-width: 400px;
+    max-width: 800px;
+    padding: 40px;
+    overflow: auto;
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    border-radius: 60px;
+}
+.BlueText{
+    font-size: 18px;
+    font-weight: bold;
+    padding: 9px 28px;
+    border-radius: 30px;
+
+    background-color: #ebfdff !important;
+    color: #56c4fc;
+}
+.name{
+    float: left;
+    width: 100%;
+    font-size: 36px;
+    font-weight: bold;
+    color: #202020;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
