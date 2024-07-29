@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://luch4736.github.io</id>
+    <title>(4736)*Blog</title>
+    <updated>2024-07-29T15:32:33.689Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://luch4736.github.io"/>
+    <link rel="self" href="https://luch4736.github.io/atom.xml"/>
+    <subtitle>琐事和日常？</subtitle>
+    <logo>https://luch4736.github.io/images/avatar.png</logo>
+    <icon>https://luch4736.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2024, (4736)*Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[mai的算法的DX代的记录的文字]]></title>
+        <id>https://luch4736.github.io/post/2GwvWgY6N/</id>
+        <link href="https://luch4736.github.io/post/2GwvWgY6N/">
+        </link>
+        <updated>2024-07-13T23:31:57.000Z</updated>
+    </entry>
+</feed>
