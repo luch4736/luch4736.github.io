@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEC2024-Maker</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.loli.net/css?family=Source+Han+Sans:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Source Han Sans', sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        #canvas {
+            display: none;
+        }
+
+        #preview {
+            display: none;
+            max-width: 100%;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #downloadLink {
+            display: none;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>WEC2024.Maker</h1>
+        <p>如果需要打印图片，尺寸是6cm x 8.5cm。请不要倒卖打印的资源。</p>
+        <form id="infoForm">
+            <div class="form-group">
+                <label for="trackName">曲目名:</label>
+                <input type="text" class="form-control" id="trackName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="difficulty">难度:</label>
+                <input type="text" class="form-control" id="difficulty" required>
+            </div>
+
+            <div class="form-group">
+                <label for="level">等级:</label>
+                <input type="text" class="form-control" id="level" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category">分类:</label>
+                <input type="text" class="form-control" id="category" required>
+            </div>
+
+            <div class="form-group">
+                <label for="scoreType">谱面类型:</label>
+                <input type="text" class="form-control" id="scoreType" required>
+            </div>
+
+            <div class="form-group">
+                <label for="declaration">声明内容:</label>
+                <input type="text" class="form-control" id="declaration" placeholder="舞萌DX 公开组-A" required>
+            </div>
+
+            <div class="form-group">
+                <label for="defaultText">默认文字:</label>
+                <input type="text" class="form-control" id="defaultText" placeholder="华立电竞WEC2024总决赛" required>
+            </div>
+
+            <div class="form-group">
+                <label for="imageInput">选择曲绘:</label>
+                <input type="file" class="form-control-file" id="imageInput" accept="image/png" required>
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="generateImage()">合成图片</button>
+        </form>
+
+        <img id="preview" alt="合成预览">
+        <a id="downloadLink" class="btn btn-link">点击下载图片</a>
+
+        <canvas id="canvas" width="1200" height="1700"></canvas>
+    </div>
+
+    <script>
+        function generateImage() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = 'black';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const backgroundImage = new Image();
+            backgroundImage.src = './bg.png';
+            backgroundImage.onload = () => {
+                ctx.drawImage(backgroundImage, 0, 0, 1200, 1700);
+
+                const fileInput = document.getElementById('imageInput');
+                const file = fileInput.files[0];
+                const userImage = new Image();
+                userImage.src = URL.createObjectURL(file);
+                userImage.onload = () => {
+                    ctx.drawImage(userImage, 100, 100, 1000, 1000);
+
+                    const trackName = document.getElementById('trackName').value;
+                    ctx.fillStyle = '#EED283';
+                    ctx.font = '900 92px "Source Han Sans"';
+                    const trackText = `《 ${trackName} 》`;
+                    ctx.fillText(trackText, (canvas.width - ctx.measureText(trackText).width) / 2, 1240);
+
+                    const difficulty = document.getElementById('difficulty').value;
+                    const level = document.getElementById('level').value;
+                    const category = document.getElementById('category').value;
+                    const scoreType = document.getElementById('scoreType').value;
+                    ctx.font = '700 60px "Source Han Sans"';
+                    const infoText1 = `难度 : ${difficulty}   等级 : ${level}`;
+                    const infoText2 = `分类 :【${category}】  谱面类型 : ${scoreType}`;
+                    ctx.fillText(infoText1, (canvas.width - ctx.measureText(infoText1).width) / 2, 1350);
+                    ctx.fillText(infoText2, (canvas.width - ctx.measureText(infoText2).width) / 2, 1422);
+
+                    const declaration = document.getElementById('declaration').value;
+                    ctx.fillStyle = '#EED283';
+                    ctx.fillRect(225, 1492, 750, 95);
+                    ctx.fillStyle = 'black';
+                    ctx.font = '900 64px "Source Han Sans"';
+                    ctx.fillText(declaration, 225 + (750 - ctx.measureText(declaration).width) / 2, 1505 + (95 + 20) / 2);
+
+                    const defaultText = document.getElementById('defaultText').value;
+                    canvas.style.letterSpacing = '15px';
+                    ctx.fillStyle = '#EED283';
+                    ctx.font = '500 42px "Source Han Sans"';
+                    ctx.fillText(defaultText, (canvas.width - ctx.measureText(defaultText).width) / 2, 1648);
+
+                    const preview = document.getElementById('preview');
+                    preview.src = canvas.toDataURL('image/png');
+                    preview.style.display = 'block';
+
+                    const downloadLink = document.getElementById('downloadLink');
+                    downloadLink.href = canvas.toDataURL('image/png');
+                    downloadLink.download = 'wec2024.png';
+                    downloadLink.style.display = 'block';
+                };
+            };
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
